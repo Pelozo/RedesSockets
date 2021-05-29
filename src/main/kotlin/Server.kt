@@ -3,6 +3,8 @@ import java.net.ServerSocket
 import java.net.Socket
 import java.net.SocketException
 import java.nio.charset.Charset
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.logging.Logger
 import kotlin.concurrent.thread
@@ -81,7 +83,8 @@ class Server(private val serverPort: Int): Runnable{
         fun run() {
             // Mensaje de bienvenida
             write("Hey bud. Try typing hello, ping or something. Type \"x\" to leave")
-
+            val help="Comandos validos: ping, kotlin, js, port, hora y fecha, hello"
+            write(help);
             //se queda esperando mientras esté corriendo
             while (!stopped) {
                 //pueden pasar varias cosas raras, asi que por las dudas lo ponemos en un try.
@@ -102,10 +105,21 @@ class Server(private val serverPort: Int): Runnable{
                         "ping"->write("pong")
 
                         //saludar
-                        "hello","hi", "hey"->write("Hey!")
+                        "hello","hi", "hey", "hola", "holis", "ciao", "oi"->write("Hey!")
+
+                        "kotlin", "js" ->write("Kotlin > JS")
 
                         "port"->write(client.localPort.toString())
 
+                        "hora y fecha"->{
+                            val current = LocalDateTime.now()
+
+                            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+                            val formatted = current.format(formatter)
+
+                            write("la fecha y hora actual querido es: $formatted")
+                        }
+                        "help", "ayuda", "h", "sos"->write(help)
                         //idk
                         else->write("Not a valid command my dude")
                     }
