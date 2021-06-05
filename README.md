@@ -47,7 +47,7 @@ Error 2310: El servidor se ha caído mientras intentaba procesar el Handshake Re
 Error 2315: El servidor recibió el Handshake Request (conexión con el cliente) y devolvió una respuesta del tipo non-IIOP que el cliente no puede procesar (El cliente recibe una respuesta en un lenguaje que no entiende).
 
 
-- **7. Diferencias entre sockets UDP y TCP 
+- **7. Diferencias entre sockets UDP y TCP** 
 
 
 La principal diferencia entre ambos es que el UDP necesita que le entreguemos paquetes de datos que el usuario debe construir, mientras el TCP admite bloques de datos (cuyo tamaño puede ir desde 1 bytes hasta muchos K bytes, dependiendo de la implementación) que serán empaquetados de forma transparente antes de ser transmitidos. Existe además otra diferencia importante. Tanto los paquetes de datos UDP como los segmentos TCP (este es el nombre que reciben los paquetes TCP) pueden perderse (muy rara vez llegan al destino correcto con errores). 
@@ -61,5 +61,24 @@ Los sockets asincrónicos usan subprocesos del sistema para procesar las conexio
 
 
 > PARTE PRACTICA
+
+Comando para compilar a un .jar
+
+```java
+./gradlew jar
+```
+
+Ejecutar Server
+
+```
+java -jar <NombreDelJar>.jar
+```
+
+Ejecutar Client
+
+```
+java -jar <NombreDelJar>.jar --client
+```
+
 
 
